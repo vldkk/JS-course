@@ -1,0 +1,2 @@
+const list = document.getElementById("list");
+console.log(list.firstElementChild.textContent + ', ' + list.lastElementChild.textContent + ', ' + list.children[1].textContent + ', ' + list.children[3].textContent + ', ' + list.children[2].textContent);
