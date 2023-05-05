@@ -8,16 +8,16 @@ colors.addEventListener('click', (event) => {
             event.target.classList.add('active');
             switch (event.target.getAttribute('color')) {
                 case 'red':
-                    document.querySelector('#outprice').innerHTML = '172.50';
+                    document.querySelector('#outprice').innerHTML = event.target.getAttribute('data-price');
                     break;
                 case 'green':
-                    document.querySelector('#outprice').innerHTML = '205.99';
+                    document.querySelector('#outprice').innerHTML = event.target.getAttribute('data-price');
                     break;
                 case 'orange':
-                    document.querySelector('#outprice').innerHTML = '168.20';
+                    document.querySelector('#outprice').innerHTML = event.target.getAttribute('data-price');
                     break;
                 default:
-                    document.querySelector('#outprice').innerHTML = '199.99';
+                    document.querySelector('#outprice').innerHTML = event.target.getAttribute('data-price');
             }
         }
     }
