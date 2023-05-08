@@ -1,3 +1,4 @@
+// https://codepen.io/misha_klymenko/pen/abzLvqo
 const circles = document.querySelectorAll('.circle');
 
 circles.forEach(element => {

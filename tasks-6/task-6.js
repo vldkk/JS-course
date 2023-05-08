@@ -1,5 +1,7 @@
 // https://codepen.io/misha_klymenko/pen/dyjyeGO
 const colors = document.querySelector('.colors');
+const sizes = document.querySelector('.sizes');
+const materials = document.querySelector('.materials');
 
 colors.addEventListener('click', (event) => {
     if (event.target.classList.contains('color')) {
@@ -8,63 +10,71 @@ colors.addEventListener('click', (event) => {
             event.target.classList.add('active');
             switch (event.target.getAttribute('color')) {
                 case 'red':
-                    document.querySelector('#outprice').innerHTML = event.target.getAttribute('data-price');
+                    getPriceByColor(event.target.getAttribute('data-price'));
+                    updatePrice(priceColor, priceMaterial, priceSize);
                     break;
                 case 'green':
-                    document.querySelector('#outprice').innerHTML = event.target.getAttribute('data-price');
+                    getPriceByColor(event.target.getAttribute('data-price'));
+                    updatePrice(priceColor, priceMaterial, priceSize);
                     break;
                 case 'orange':
-                    document.querySelector('#outprice').innerHTML = event.target.getAttribute('data-price');
+                    getPriceByColor(event.target.getAttribute('data-price'));
+                    updatePrice(priceColor, priceMaterial, priceSize);
                     break;
                 default:
-                    document.querySelector('#outprice').innerHTML = event.target.getAttribute('data-price');
+                    getPriceByColor(event.target.getAttribute('data-price'));
+                    updatePrice(priceColor, priceMaterial, priceSize);
             }
         }
     }
-    const sizes = document.querySelector('.sizes');
+});
 
-    const materials = document.querySelector('.materials');
-
-    sizes.addEventListener('click', (event) => {
-        if (event.target.classList.contains('size')) {
-            if (!event.target.classList.contains('active')) {
-                document.querySelector('.size.active').classList.remove('active');
-                event.target.classList.add('active');
-                switch (event.target.getAttribute('size')) {
-                    case 'small':
-                        updatePrice();
-                        break;
-                    case 'medium':
-                        updatePrice(10);
-                        break;
-                    case 'large':
-                        updatePrice(20);
-                        break;
-                }
-            }
-        }
-    });
-
-    materials.addEventListener('click', (event) => {
-        if (event.target.classList.contains('material')) {
-            if (!event.target.classList.contains('active')) {
-                document.querySelector('.material.active').classList.remove('active');
-                event.target.classList.add('active');
-                switch (event.target.getAttribute('material')) {
-                    case 'leather':
-                        updatePrice();
-                        break;
-                    case 'synthetic':
-                        updatePrice(-10);
-                        break;
-                }
-            }
-        }
-    });
-
-    function updatePrice(variation = 0) {
-        const basePrice = parseFloat(document.querySelector('#outprice').innerHTML);
-        const newPrice = basePrice + variation;
-        document.querySelector('#outprice').innerHTML = newPrice.toFixed(2);
+sizes.addEventListener('change', () => {
+    switch (sizes.value) {
+        case '36':
+        case '37':
+            getPriceBySize(0);
+            updatePrice(priceColor, priceMaterial, priceSize);
+            break;
+        case '38':
+        case '39':
+        case '43':
+        case '44':
+            getPriceBySize(20);
+            updatePrice(priceColor, priceMaterial, priceSize);
+            break;
+        case '40':
+        case '41':
+        case '42':
+        case '45':
+        case '46':
+            getPriceBySize(10);
+            updatePrice(priceColor, priceMaterial, priceSize);
+            break;
     }
-})
+});
+
+materials.addEventListener('change', () => {
+    switch (materials.value) {
+        case 'leather':
+            getPriceByMaterial(0);
+            updatePrice(priceColor, priceMaterial, priceSize);
+            break;
+        case 'synthetic':
+            getPriceByMaterial(-10);
+            updatePrice(priceColor, priceMaterial, priceSize);
+            break;
+    }
+});
+let priceColor = 170,
+    priceMaterial = 0,
+    priceSize = 0;
+const getPriceByColor = (price) => priceColor = +price;
+const getPriceBySize = (price) => priceSize = +price;
+const getPriceByMaterial = (price) => priceMaterial = +price;
+
+function updatePrice(priceColor, priceMaterial, priceSize) {
+    const basePrice = priceColor;
+    const newPrice = basePrice + priceMaterial + priceSize;
+    document.querySelector('#outprice').innerHTML = newPrice;
+}

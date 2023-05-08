@@ -337,6 +337,10 @@ body{
     margin-right: 2px;
 }
 
+.select-container{
+    display: flex;
+}
+
 @media (max-width: 1070px){
     .shoe{
         width: 135%;
